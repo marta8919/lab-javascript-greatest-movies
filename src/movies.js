@@ -39,18 +39,58 @@ function ratesAverage(movies){
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 
+function dramaMOviesRate(movies){
+    if (movies.length === 0){
+        return 0;
+    } 
 
+    if (movies.genre.includes('Drama')){
+        let totalMovies = movies.reduce((acc, elem) => {
+            if (elem.rate === undefined){
+                return acc;
+            }
+            else {
+                return acc+elem.rate;
+            }
+        }, 0);
+
+        return +(totalMovies/movies.length).toFixed(2);
+    }
+}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
 function orderByYear(movies){
     let clonedArray = JSON.parse(JSON.stringify(movies));
+
+    clonedArray.sort((a,b) => {
+        if (a.year == b.year){
+            if (a.title > b.title){
+                return 1;
+            } else if (a.title < b.title){
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+        
+        if(a.year > b.year){
+            return 1
+        } else if (a.year < b.year){
+            return -1
+        } else {
+            return 0
+        }
+    })
+    return clonedArray
 }
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 
 function orderAlphabetically(movies){
+
     let clonedArray = JSON.parse(JSON.stringify(movies));
-    clonedArray.sort(function(a,b){
+
+    clonedArray.sort((a,b) => {
         if (a.title > b.title){
             return 1;
         } else if (a.title < b.title){
@@ -59,5 +99,7 @@ function orderAlphabetically(movies){
             return 0;
         }
     })
-    return clonedArray.slice(0,20)
+    return clonedArray;
 };
+
+console.log(orderAlphabetically(movies));
