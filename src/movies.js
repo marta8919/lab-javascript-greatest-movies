@@ -82,17 +82,21 @@ function orderAlphabetically(movies){
 
     let clonedArray = movies.map(function(movies){
         return movies.title
-    })
+    }) //cloned array only with the titles
 
     clonedArray.sort((a,b) => {
-        return a.localeCompare(b)
-    }); 
+        if (a < b)
+        { return -1};
+        if (a > b)
+        { return 1};
+        return 0; //could also use localeCompare
+    }); //put them in order
 
     if (movies.length < 20){
         return clonedArray
     }
     else {
         return clonedArray.slice(0,20)
-    }
+    } //print first 20
 };
 
